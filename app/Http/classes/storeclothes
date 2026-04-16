@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\classes;  // تأكد من أن الـ namespace مكتوب بشكل صحيح
+
+use App\classes\Http\subclass\Subclass;  // استيراد الـ interface بشكل صحيح
+
+// تنفيذ الـ interface
+class storeclothes implements Subclass
+{
+    // تنفيذ دالة create() من الـ interface
+    public function create(Request $request)
+    {
+        // منطق إنشاء منتج جديد أو أي منطق آخر
+     $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'description' => 'nullable|string|max:1000',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         'storeid' => 'required',
+
+     ]);
+
+
+     $product = Product::create([
+        'name' => $request->name,
+        'price' => $request->price,
+        'description' => $request->description,  // يمكن أن تكون null
+        
+    ]);
+
+
+
+
+    }
+
+    // تنفيذ دالة update() من الـ interface
+    public function update()
+    {
+        // منطق تحديث البيانات
+        echo "Store has been updated.";
+    }
+
+    // تنفيذ دالة delete() من الـ interface
+    public function delete()
+    {
+        // منطق حذف البيانات
+        echo "Store has been deleted.";
+    }
+}

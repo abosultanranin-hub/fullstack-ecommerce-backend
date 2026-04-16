@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Http\Classes;  // يجب أن تكون بهذا الشكل
+
+interface Subclass  // يمكن كتابة الاسم في حالة الـ interface بـ PascalCase (أي الحروف الأولى الكبيرة)
+{
+    public function create(Request $request); 
+
+    public function update(); 
+
+    public function delete(); 
+}

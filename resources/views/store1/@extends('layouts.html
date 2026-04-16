@@ -1,0 +1,157 @@
+@extends('layouts.app') {{-- أو layout القالب الخاص بك --}}
+@section('content')
+
+<!--================Cart Area =================-->
+<section class="cart_area padding_top">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">المنتج</th>
+                            <th scope="col">السعر</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartTableBody">
+                        <!-- يتم ملؤه عبر jQuery -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="checkout_btn_inner float-right" style="display: none">
+                <a class="btn_1 checkout_btn_1" href="#">الانتقال للدفع</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->
+
+@endsection
+
+@section('scripts')
+<script>
+    // إعداد CSRF
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+
+    function loadCartDetails() {
+        $.ajax({
+            url: "{{ route('cart.details') }}",
+            method: "GET",
+            success: function (res) {
+                let total = 0;
+                $('#cartTableBody').empty();
+
+                if (res.items.length === 0) {
+                    $('#cartTableBody').append('<tr><td colspan="4" class="text-center">السلة فارغة</td></tr>');
+                    $('.checkout_btn_inner').hide();
+                    return;
+                }
+
+                $('.checkout_btn_inner').show();
+
+                res.items.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+
+                    $('#cartTableBody').append(`
+                        <tr data-id="${item.products.id}">
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="assets/img/arrivel/arrivel_${(index % 2) + 1}.png" alt="" style="width: 80px;" />
+                                    </div>
+                                    <div class="media-body">
+                                        <p>${item.products.name}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><h5>$${item.products.price.toFixed(2)}</h5></td>
+                            <td>
+                                <div class="product_count">
+                                    <span class="input-number-decrement" data-id="${item.products.id}"><i class="ti-minus"></i></span>
+                                    <input class="input-number" type="text" value="${item.quantity}" min="1" max="10" data-id="${item.products.id}">
+                                    <span class="input-number-increment" data-id="${item.products.id}"><i class="ti-plus"></i></span>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>$${itemTotal.toFixed(2)}</h5>
+                                <button class="btn btn-sm btn-danger mt-2 remove-btn">حذف</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        loadCartDetails();
+
+        // تعديل الكمية
+        $(document).on('click', '.input-number-increment, .input-number-decrement', function () {
+            const id = $(this).data('id');
+            const input = $('input[data-id="' + id + '"]');
+            let quantity = parseInt(input.val());
+
+            if ($(this).hasClass('input-number-increment')) {
+                quantity += 1;
+            } else if (quantity > 1) {
+                quantity -= 1;
+            }
+
+            updateQuantity(id, quantity);
+        });
+
+        $(document).on('change', '.input-number', function () {
+            const id = $(this).data('id');
+            let quantity = parseInt($(this).val());
+            if (quantity < 1) quantity = 1;
+            updateQuantity(id, quantity);
+        });
+
+        function updateQuantity(id, quantity) {
+            $.ajax({
+                url: "{{ url('/cart/update') }}/" + id,
+                method: "POST",
+                data: { id, quantity },
+                success: function () {
+                    loadCartDetails();
+                },
+                error: function () {
+                    alert('فشل تعديل الكمية');
+                }
+            });
+        }
+
+        // حذف منتج
+        $(document).on('click', '.remove-btn', function () {
+            const row = $(this).closest('tr');
+            const id = row.data('id');
+
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                method: "POST",
+                data: { id },
+                success: function () {
+                    loadCartDetails();
+                },
+                error: function () {
+                    alert('فشل حذف المنتج');
+                }
+            });
+        });
+
+        // زر الدفع
+        $('.checkout_btn_1').on('click', function () {
+            window.location.href = "{{ route('checkout.index') }}";
+        });
+    });
+</script>
+@endsection

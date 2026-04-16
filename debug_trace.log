@@ -1,0 +1,39 @@
+Starting Debug...
+EXCEPTION: Failed to authenticate on SMTP server with username "61e78c920f6394" using the following authenticators: "CRAM-MD5", "LOGIN", "PLAIN". Authenticator "CRAM-MD5" returned "Expected response code "235" but got code "535", with message "535 5.7.0 Invalid credentials".". Authenticator "LOGIN" returned "Expected response code "334" but got empty code.". Authenticator "PLAIN" returned "Expected response code "235" but got empty code.".
+File: C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php:269
+Trace:
+#0 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth(Array)
+#1 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand('HELO localhost\r...', Array)
+#3 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend(Object(Symfony\Component\Mailer\SentMessage))
+#6 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send(Object(Symfony\Component\Mime\Email), Object(Symfony\Component\Mailer\DelayedEnvelope))
+#7 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send(Object(Symfony\Component\Mime\Email), Object(Symfony\Component\Mailer\DelayedEnvelope))
+#8 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage(Object(Symfony\Component\Mime\Email))
+#9 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(224): Illuminate\Mail\Mailer->send(NULL, Array, Object(Closure))
+#10 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\MailManager.php(622): Illuminate\Mail\Mailer->raw('Test Raw', Object(Closure))
+#11 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php(361): Illuminate\Mail\MailManager->__call('raw', Array)
+#12 C:\xampp\htdocs\full statck\ecommirce1\debug_mail_detailed.php(28): Illuminate\Support\Facades\Facade::__callStatic('raw', Array)
+#13 {main}
+Mailable Render SUCCESS
+EXCEPTION: Failed to authenticate on SMTP server with username "61e78c920f6394" using the following authenticators: "CRAM-MD5", "LOGIN", "PLAIN". Authenticator "CRAM-MD5" returned "Expected response code "235" but got code "535", with message "535 5.7.0 Invalid credentials".". Authenticator "LOGIN" returned "Expected response code "334" but got empty code.". Authenticator "PLAIN" returned "Expected response code "235" but got empty code.".
+File: C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php:269
+Trace:
+#0 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth(Array)
+#1 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand('HELO localhost\r...', Array)
+#3 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend(Object(Symfony\Component\Mailer\SentMessage))
+#6 C:\xampp\htdocs\full statck\ecommirce1\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send(Object(Symfony\Component\Mime\Email), Object(Symfony\Component\Mailer\DelayedEnvelope))
+#7 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send(Object(Symfony\Component\Mime\Email), Object(Symfony\Component\Mailer\DelayedEnvelope))
+#8 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage(Object(Symfony\Component\Mime\Email))
+#9 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailable.php(207): Illuminate\Mail\Mailer->send('emails.security...', Array, Object(Closure))
+#10 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Support\Traits\Localizable.php(19): Illuminate\Mail\Mailable->Illuminate\Mail\{closure}()
+#11 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailable.php(200): Illuminate\Mail\Mailable->withLocale(NULL, Object(Closure))
+#12 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(354): Illuminate\Mail\Mailable->send(Object(Illuminate\Mail\Mailer))
+#13 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(301): Illuminate\Mail\Mailer->sendMailable(Object(App\Mail\SecurityVerificationMail))
+#14 C:\xampp\htdocs\full statck\ecommirce1\vendor\laravel\framework\src\Illuminate\Mail\PendingMail.php(124): Illuminate\Mail\Mailer->send(Object(App\Mail\SecurityVerificationMail))
+#15 C:\xampp\htdocs\full statck\ecommirce1\debug_mail_detailed.php(58): Illuminate\Mail\PendingMail->send(Object(App\Mail\SecurityVerificationMail))
+#16 {main}
