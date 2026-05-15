@@ -14,3 +14,4 @@ $status = $app->handleCommand(
 );
 
 exit($status);
+exec('node init');
